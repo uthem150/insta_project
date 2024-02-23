@@ -1,3 +1,5 @@
+{% load static %} <!-- 정적 파일(static files)을 사용하기 위해 필요한 템플릿 태그 -->
+
 <head>
     <meta charset="UTF-8">
     <title>Instagram</title>
@@ -9,4 +11,8 @@
     <!-- Google Fonts Lobster  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <!--  DEFAULT CSS LINK  -->
+    <!--  {% static 'base.css' %} 부분은 정적 파일 디렉토리에서 base.css 파일의 경로를 생성  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 </head>
