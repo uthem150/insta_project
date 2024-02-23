@@ -67,7 +67,7 @@ ROOT_URLCONF = 'instagram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], #BASE_DIR 변수와 'templates'를 조합하여 'BASE_DIR/templates' 디렉토리를 템플릿 디렉토리로 지정 (templates폴더 안의 html파일을 views.py에서 보여줌)
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
