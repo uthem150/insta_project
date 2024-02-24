@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')), #account라는 주소로 접근하면, account app으로 접근
     path('profiles/', include('profileapp.urls')),
+    path('articles/', include('articleapp.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #instagram폴더 settings안에 적은 값을 가져옴
