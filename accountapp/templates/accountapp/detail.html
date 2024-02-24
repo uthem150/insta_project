@@ -4,13 +4,16 @@
 
     <div>
         <div class="instagram_500px_div">
-            <p>
-                {{ target_user.date_joined }}
-            </p>
+
+            <img src="{{ target_user.profile.image.url }}" alt=""
+                 style="height: 12rem; width: 12rem; border-radius:15rem; margin-bottom: 2rem;">
 
             {% if target_user.profile %} <!--프로필이 존재하면-->
             <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
                 {{ target_user.profile.nickname }} <!--닉네임을 보여줌-->
+                <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}"> <!--edit화면으로 향하는 a태그-->
+                    edit
+                </a>
             </h2>
             {% else %} <!--프로필이 존재하지 않으면-->
             <a href="{% url 'profileapp:create' %}"> <!--프로필 만드는 페이지 연결-->
@@ -19,6 +22,10 @@
                 </h2>
             </a>
             {% endif %}
+
+            <h5 style="margin-bottom:3rem;">
+                {{ target_user.profile.message }} <!--소개 메세지 표시-->
+            </h5>
 
             {% if target_user == user %} <!--target_user와 지금 접속한 user가 같다면-->
             <a href="{% url 'accountapp:update' pk=user.pk %}"> <!-- URL 패턴에 대한 URL을 생성. user 객체의 pk 값을 사용하여 동적으로 생성-->
