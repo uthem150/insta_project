@@ -2,18 +2,28 @@
 
 {% block content %}
 
-    <div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">
-        <h1>Testing</h1>
+    <div style="border-radius: 1rem; margin: 2rem; text-align: center">
+        <h1 style="font-family: 'lobster', cursive;" >
+            Hello World List
+        </h1>
 
         <!-- "/account/hello_world/" URL로 POST 방식으로 전송 -->
         <form action="/account/hello_world/" method="post">
             {% csrf_token %} <!--Django에서 CSRF공격을 방지하기 위해 사용되는 템플릿 태그 (웹 애플리케이션에서 인증된 사용자의 권한을 이용하여 악의적인 요청을 보내는 공격)-->
-            <input type="submit" class="btn btn-primary" value="POST">
+            <div>
+                <input type="text" name="hello_world_input">
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="POST">
+            </div>
         </form>
 
+        <!--    hello_world_output이 있다면, h1태그 부분을 만들어라   -->
+        {% if hello_world_output %}
         <h1>
-            {{ text }}
+            {{ hello_world_output.text }}
         </h1>
+        {% endif %}
     </div>
 
 {% endblock %}
