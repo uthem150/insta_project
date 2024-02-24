@@ -18,11 +18,13 @@
             </div>
         </form>
 
-        <!--    hello_world_output이 있다면, h1태그 부분을 만들어라   -->
-        {% if hello_world_output %}
-        <h1>
-            {{ hello_world_output.text }}
-        </h1>
+        <!--    hello_world_list가 있다면, h1태그 부분을 만들어라   -->
+        {% if hello_world_list %}
+            {% for hello_world in hello_world_list %}
+            <h4>
+                {{ hello_world.text }}
+            </h4>
+            {% endfor %}
         {% endif %}
     </div>
 
