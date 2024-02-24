@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
@@ -45,3 +45,8 @@ class AccountUpdateView(UpdateView) :
     form_class = AccountUpdateForm # UserCreationForm을 사용하여 사용자 생성에 필요한 입력 폼을 정의
     success_url = reverse_lazy('accountapp:hello_world') #폼 제출 후에 이동할 URL을 지정
     template_name = 'accountapp/update.html' #사용될 템플릿 파일의 경로를 지정
+
+class AccountDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy('accountapp:login')
+    template_name = 'accountapp/delete.html'

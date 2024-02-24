@@ -11,6 +11,9 @@
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}"> <!--next 쿼리 매개변수로 추가(로그인 후, 사용자를 원래 요청한 페이지로 리디렉션)-->
             <span>Login</span>
         </a>
+        <a href="{% url 'accountapp:create' %}">
+            <span>Sign Up</span>
+        </a>
         {% else %} <!-- 로그인 된 상태일 때-->
         <a href="{% url 'accountapp:detail' pk=user.pk %}"> <!--접속해 있는 user의 primary key를 받아서 pk에 넘겨주고, detail url에 들어갈 때, 함께 /뒤에 넣어줌-->
             <span>MyPage</span>
