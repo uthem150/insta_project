@@ -9,22 +9,20 @@
 
         {% if not user.is_authenticated %}  <!--로그인 안 된 상태일 때,-->
         <a href="{% url 'accountapp:login' %}?next={{ request.path }}"> <!--next 쿼리 매개변수로 추가(로그인 후, 사용자를 원래 요청한 페이지로 리디렉션)-->
-            <span>login</span>
+            <span>Login</span>
         </a>
         {% else %} <!-- 로그인 된 상태일 때-->
+        <a href="{% url 'accountapp:detail' pk=user.pk %}"> <!--접속해 있는 user의 primary key를 받아서 pk에 넘겨주고, detail url에 들어갈 때, 함께 /뒤에 넣어줌-->
+            <span>MyPage</span>
+        </a>
         <!--   장고 5부터 logout는 POST 방식만 허용    -->
         <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-            <span>logout</span>
+            <span>Logout</span>
         </a>
         <!-- 로그아웃을 처리하기 위한 폼을 정의 -->
         <form id="logout-form" action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post" style="display: none;">
             {% csrf_token %}
         </form>
-
-<!--    <form action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post">-->
-<!--        {% csrf_token %}-->
-<!--        <button type="submit">logout</button>-->
-<!--    </form>-->
         {% endif %}
     </div>
 </div>

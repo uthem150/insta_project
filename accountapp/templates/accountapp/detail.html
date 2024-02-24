@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+        <div class="instagram_500px_div">
+            <p>
+                {{ target_user.date_joined }}
+            </p>
+            <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
+                {{ target_user.username }}
+            </h2>
+        </div>
+    </div>
+{% endblock %}
