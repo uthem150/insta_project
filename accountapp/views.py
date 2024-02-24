@@ -42,11 +42,13 @@ class AccountDetailView(DetailView):
 
 class AccountUpdateView(UpdateView) :
     model = User #모델을 생성하는 데 사용될 모델 클래스를 지정
+    context_object_name = 'target_user'
     form_class = AccountUpdateForm # UserCreationForm을 사용하여 사용자 생성에 필요한 입력 폼을 정의
     success_url = reverse_lazy('accountapp:hello_world') #폼 제출 후에 이동할 URL을 지정
     template_name = 'accountapp/update.html' #사용될 템플릿 파일의 경로를 지정
 
 class AccountDeleteView(DeleteView):
     model = User
+    context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'
