@@ -15,4 +15,30 @@
     <!--  DEFAULT CSS LINK  -->
     <!--  {% static 'base.css' %} 부분은 정적 파일 디렉토리에서 base.css 파일의 경로를 생성  -->
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+
+
+    <!--  NanumSquare fonts  -->
+    <style>
+            @font-face {
+                font-family: 'NanumSquareL';
+                src: local('NanumSquareL'),
+                url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+            }
+            @font-face {
+                font-family: 'NanumSquareEB';
+                src: local('NanumSquareEB'),
+                url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+            }
+            @font-face {
+                font-family: 'NanumSquareB';
+                src: local('NanumSquareB'),
+                url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+            }
+            @font-face {
+                font-family: 'NanumSquareR';
+                src: local('NanumSquareR'),
+                url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+            }
+    </style>
+
 </head>

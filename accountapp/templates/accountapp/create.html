@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
 
-  <div style="text-align:center">
+  <div style="text-align: center; max-width: 500px; margin: 4rem auto">
+    <div class="mb-4">
+      <h4>SignUp</h4>
+    </div>
     <form action="{% url 'accountapp:create' %}" method="post"> <!-- accountapp 내부의 create라는 라우트로 연결해라 -->
       {% csrf_token %}
-      {{ form }}
-      <input type="submit" class="btn btn-primary">
+
+      <!-- bootstrap이 적용된 form사용 -->
+      {% bootstrap_form form %}
+      <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
     </form>
   </div>
 
