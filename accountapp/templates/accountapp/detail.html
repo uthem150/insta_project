@@ -10,6 +10,14 @@
             <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
                 {{ target_user.username }}
             </h2>
+
+            {% if target_user == user %} <!--target_user와 지금 접속한 user가 같다면-->
+            <a href="{% url 'accountapp:update' pk=user.pk %}"> <!-- URL 패턴에 대한 URL을 생성. user 객체의 pk 값을 사용하여 동적으로 생성-->
+                <p>
+                    Change Info
+                </p>
+            </a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

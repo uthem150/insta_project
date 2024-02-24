@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+  <div class="instagram_500px_div">
+    <div class="mb-4">
+      <h4>Change Info</h4>
+    </div>
+    <form action="{% url 'accountapp:update' pk=user.pk %}" method="post"> <!-- accountapp 내부의 update라는 라우트로 연결해라(접속해있는 사람의 정보) -->
+      {% csrf_token %}
+
+      <!-- bootstrap이 적용된 form사용 -->
+      {% bootstrap_form form %}
+      <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+    </form>
+  </div>
+
+{% endblock %}
