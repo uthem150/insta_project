@@ -132,7 +132,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #정적 파일들을 수집(collect)하여 저장할 디렉토리를 설정(BASE_DIR는 Django 프로젝트의 최상위 디렉토리를 나타내는 변수)
 
 #추가적인 정적 파일 디렉토리를 설정
@@ -148,3 +147,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
