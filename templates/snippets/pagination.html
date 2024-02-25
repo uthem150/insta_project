@@ -1,30 +1,58 @@
 
-<!--전체 가져오기, 이동-->
-<div style="text-align: center; margin: 1rem 0;">
+<!--5개씩 보여주기 >, >>-->
+{% if page_obj.has_other_pages %}
+  <div style="text-align: center; margin: 1rem 0;">
   {% if page_obj.has_previous %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill">
-      이전
-    </a>
+    <a href="?page=1" class="btn btn-secondary rounded-pill"> << </a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill"> < </a>
   {% endif %}
 
-  {% for page in paginator.page_range %} <!-- paginator의 page_range를 순회하면서 페이지 링크를 생성 -->
-    {% if page == page_obj.number %}
-      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill active">
-        {{ page }}
-      </a>
-    {% else %}
-      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill">
-        {{ page }}
-      </a>
+  {% for page_num in page_obj.paginator.page_range %}
+    {% if page_num >= page_obj.number|add:'-5' and page_num <= page_obj.number|add:'5' %}
+      {% if page_num == page_obj.number %}
+        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>
+      {% else %}
+        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>
+      {% endif %}
     {% endif %}
   {% endfor %}
 
   {% if page_obj.has_next %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill">
-      다음
-    </a>
+    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill"> > </a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary rounded-pill"> >> </a>
   {% endif %}
-</div>
+  </div>
+{% endif %}
+
+
+
+
+<!--전체 가져오기, 이동-->
+<!--<div style="text-align: center; margin: 1rem 0;">-->
+<!--  {% if page_obj.has_previous %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill">-->
+<!--      이전-->
+<!--    </a>-->
+<!--  {% endif %}-->
+
+<!--  {% for page in paginator.page_range %} &lt;!&ndash; paginator의 page_range를 순회하면서 페이지 링크를 생성 &ndash;&gt;-->
+<!--    {% if page == page_obj.number %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill active">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% else %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% endif %}-->
+<!--  {% endfor %}-->
+
+<!--  {% if page_obj.has_next %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill">-->
+<!--      다음-->
+<!--    </a>-->
+<!--  {% endif %}-->
+<!--</div>-->
 
 <!--전체를 가져오기-->
 <!--<div style="text-align: center; margin: 1rem 0;">-->
