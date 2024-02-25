@@ -21,51 +21,24 @@
 
 </style>
 
-    <!DOCTYPE html>
+   {% if article_list %}
     <div class="container">
-      <div class="item1">
-        <img src="https://picsum.photos/200/300" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/340" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/260" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/400" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/250" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/310" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/210" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/300" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/330" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/260" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/180" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/200" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/320" alt="">
-      </div>
-      <div>
-        <img src="https://picsum.photos/200/300" alt="">
-      </div>
+        {% for article in article_list %} <!--article list안의 모든 article에 대해 반복-->
+        <a href="{% url 'articleapp:detail' pk=article.pk %}"> <!--article 객체의 pk 값을 기반으로 articleapp 앱의 detail URL로 이동-->
+            {% include 'snippets/card.html' with article=article %} <!--'snippets/card.html' 템플릿을 불러와서 article 객체를 해당 템플릿에 전달하여 렌더링 -->
+        </a>
+        {% endfor %}
     </div>
+    <script src="{% static 'js/magicgrid.js' %}"></script>
+    {% else %}
+    <div class="text-center">
+        <h1>No Articles Yet!</h1>
+    </div>
+    {% endif %}
+
+    <!--  'snippets/pagination.html' 템플릿을 불러와서 page_obj 객체를 해당 템플릿에 전달하여 페이징을 표시  -->
+    <!--page_obj는 Paginator를 통해 생성된 객체-->
+    {% include 'snippets/pagination.html' with page_obj=page_obj %}
 
     <!-- 글쓰기 버튼  -->
     <div style="text-align: center">

@@ -4,7 +4,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
@@ -52,3 +53,11 @@ class ArticleDeleteView(DeleteView): #Article 모델의 삭제 기능을 구현
     context_object_name = 'target_article'
     success_url = reverse_lazy('articleapp:list')
     template_name = 'articleapp/delete.html' #사용할 템플릿 파일을 지정
+
+
+class ArticleListView(ListView): #ListView를 상속받은 ArticleListView 클래스를 정의
+    model = Article
+    context_object_name = 'article_list' #템플릿에서 사용할 컨텍스트 변수의 이름, article_list라는 이름으로 템플릿에 전달
+    template_name = 'articleapp/list.html'
+    paginate_by = 1 #한 페이지에 보여줄 항목의 수
+
