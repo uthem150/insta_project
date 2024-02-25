@@ -59,5 +59,18 @@ class ArticleListView(ListView): #ListView를 상속받은 ArticleListView 클�
     model = Article
     context_object_name = 'article_list' #템플릿에서 사용할 컨텍스트 변수의 이름, article_list라는 이름으로 템플릿에 전달
     template_name = 'articleapp/list.html'
-    paginate_by = 1 #한 페이지에 보여줄 항목의 수
+    paginate_by = 5 #한 페이지에 보여줄 항목의 수
 
+    def get_context_data(self, **kwargs): #ListView가 템플릿에 전달하는 컨텍스트 데이터를 추가로 제공하거나 수정
+        context = super().get_context_data(**kwargs) #부모 클래스인 ListView의 get_context_data 메소드를 호출하여 기본 컨텍스트 데이터를 가져옴
+        total_pages = context['paginator'].num_pages # 페이징 처리를 위해 전체 페이지 수를 total_pages 변수에 저장
+        current_page = context['page_obj'].number #현재 페이지 번호를 current_page 변수에 저장
+
+        # 페이지 그룹의 시작 페이지와 끝 페이지를 계산합니다.
+        start_page = ((current_page - 1) // 10) * 10 + 1
+        end_page = start_page + 9
+        if end_page > total_pages: #만약 끝 페이지 번호가 전체 페이지 수를 초과하면, 끝 페이지 번호를 전체 페이지 수로 수정
+            end_page = total_pages
+
+        context['page_range'] = range(start_page, end_page + 1) #시작 페이지부터 끝 페이지까지의 범위를 page_range라는 이름으로 컨텍스트 데이터에 추가
+        return context #수정한 컨텍스트 데이터를 반환
