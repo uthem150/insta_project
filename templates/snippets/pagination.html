@@ -1,28 +1,52 @@
-
-<!--5개씩 보여주기 >, >>-->
+<!--10개씩 보여주기-->
 {% if page_obj.has_other_pages %}
   <div style="text-align: center; margin: 1rem 0;">
-  {% if page_obj.has_previous %}
-    <a href="?page=1" class="btn btn-secondary rounded-pill"> << </a>
-    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill"> < </a>
+  {% if page_range.0|add:"-10" > 0 %}
+    <a href="?page={{ page_range.0|add:"-10" }}" class="btn btn-secondary rounded-pill"> << </a>
   {% endif %}
 
-  {% for page_num in page_obj.paginator.page_range %}
-    {% if page_num >= page_obj.number|add:'-5' and page_num <= page_obj.number|add:'5' %}
-      {% if page_num == page_obj.number %}
-        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>
-      {% else %}
-        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>
-      {% endif %}
+  {% for page_num in page_range %}
+    {% if page_num == page_obj.number %}
+      <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>
+    {% else %}
+      <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>
     {% endif %}
   {% endfor %}
 
-  {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill"> > </a>
-    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary rounded-pill"> >> </a>
+  {% if page_range|last|add:"1" <= page_obj.paginator.num_pages %}
+    <a href="?page={{ page_range|last|add:"1" }}" class="btn btn-secondary rounded-pill"> >> </a>
   {% endif %}
   </div>
 {% endif %}
+
+
+
+
+
+<!--5개씩 보여주기 >, >>-->
+<!--{% if page_obj.has_other_pages %}-->
+<!--  <div style="text-align: center; margin: 1rem 0;">-->
+<!--  {% if page_obj.has_previous %}-->
+<!--    <a href="?page=1" class="btn btn-secondary rounded-pill"> << </a>-->
+<!--    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill"> < </a>-->
+<!--  {% endif %}-->
+
+<!--  {% for page_num in page_obj.paginator.page_range %}-->
+<!--    {% if page_num >= page_obj.number|add:'-5' and page_num <= page_obj.number|add:'5' %}-->
+<!--      {% if page_num == page_obj.number %}-->
+<!--        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>-->
+<!--      {% else %}-->
+<!--        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>-->
+<!--      {% endif %}-->
+<!--    {% endif %}-->
+<!--  {% endfor %}-->
+
+<!--  {% if page_obj.has_next %}-->
+<!--    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill"> > </a>-->
+<!--    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary rounded-pill"> >> </a>-->
+<!--  {% endif %}-->
+<!--  </div>-->
+<!--{% endif %}-->
 
 
 
