@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+
+    <div class="instagram_500px_div">
+        <div class="mb-4">
+            <h4>Article Update</h4>
+        </div>
+        <!--  POST 메서드를 사용, views.py에서 지정한 객체 명을 이용해 접근 -->
+        <form action="{% url 'articleapp:update' pk=target_article.pk %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+        </form>
+    </div>
+
+{% endblock %}

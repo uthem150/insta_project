@@ -67,6 +67,13 @@
       </div>
     </div>
 
+    <!-- 글쓰기 버튼  -->
+    <div style="text-align: center">
+        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
+            Create Article
+        </a>
+    </div>
+
     <!--staitc 내부의 js폴더의 magicgrid.js파일 가져옴-->
     <script src="{% static 'js/magicgrid.js' %}"></script>
 

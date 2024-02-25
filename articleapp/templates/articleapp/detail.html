@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div>
+    <div class="instagram_500px_div">
+
+      <h1>
+        {{ target_article.title }} <!--게시글의 제목을 출력-->
+      </h1>
+
+      <img src="{{ target_article.image.url }}" alt=""> <!--게시글의 이미지 URL을 출력-->
+
+      <p>
+        {{ target_article.content }} <!--게시글의 내용을 출력-->
+      </p>
+
+
+    <a href="{% url 'articleapp:update' pk=target_article.pk %}">
+      <p>Update Article</p>
+    </a>
+      <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
+      <p>Delete Article</p>
+    </a>
+    </div>
+  </div>
+
+{% endblock %}
