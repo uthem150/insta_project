@@ -1,20 +1,37 @@
 
-<!--앞뒤 1개씩 가져오기-->
+
+<!--전체를 가져오기-->
 <div style="text-align: center; margin: 1rem 0;">
-    {% if page_obj.has_previous %} <!--현재 페이지에서, 이전 페이지가 있는지 확인-->
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"
-       class="btn btn-secondary rounded-pill"> <!--이전 페이지로 향하는 링크 넘겨줌-->
-        {{ page_obj.previous_page_number }}
-    </a>
+  {% for page in paginator.page_range %} <!-- paginator의 page_range를 순회하면서 페이지 링크를 생성 -->
+    {% if page == page_obj.number %}
+      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill active">
+        {{ page }}
+      </a>
+    {% else %}
+      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill">
+        {{ page }}
+      </a>
     {% endif %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"
-       class="btn btn-secondary rounded-pill active"> <!--현재 페이지로 이동하는 링크를 생성-->
-        {{ page_obj.number }}
-    </a>
-    {% if page_obj.has_next %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"
-       class="btn btn-secondary rounded-pill"> <!--다음 페이지로 이동하는 링크를 생성-->
-        {{ page_obj.next_page_number }}
-    </a>
-    {% endif %}
+  {% endfor %}
 </div>
+
+
+<!--앞뒤 1개씩 가져오기-->
+<!--<div style="text-align: center; margin: 1rem 0;">-->
+<!--    {% if page_obj.has_previous %} &lt;!&ndash;현재 페이지에서, 이전 페이지가 있는지 확인&ndash;&gt;-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"-->
+<!--       class="btn btn-secondary rounded-pill"> &lt;!&ndash;이전 페이지로 향하는 링크 넘겨줌&ndash;&gt;-->
+<!--        {{ page_obj.previous_page_number }}-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"-->
+<!--       class="btn btn-secondary rounded-pill active"> &lt;!&ndash;현재 페이지로 이동하는 링크를 생성&ndash;&gt;-->
+<!--        {{ page_obj.number }}-->
+<!--    </a>-->
+<!--    {% if page_obj.has_next %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"-->
+<!--       class="btn btn-secondary rounded-pill"> &lt;!&ndash;다음 페이지로 이동하는 링크를 생성&ndash;&gt;-->
+<!--        {{ page_obj.next_page_number }}-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--</div>-->
