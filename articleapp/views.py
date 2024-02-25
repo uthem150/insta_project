@@ -61,3 +61,16 @@ class ArticleListView(ListView): #ListView를 상속받은 ArticleListView 클�
     template_name = 'articleapp/list.html'
     paginate_by = 1 #한 페이지에 보여줄 항목의 수
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_pages = context['paginator'].num_pages
+        current_page = context['page_obj'].number
+
+        # 페이지 그룹의 시작 페이지와 끝 페이지를 계산합니다.
+        start_page = ((current_page - 1) // 10) * 10 + 1
+        end_page = start_page + 9
+        if end_page > total_pages:
+            end_page = total_pages
+
+        context['page_range'] = range(start_page, end_page + 1)
+        return context

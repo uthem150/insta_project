@@ -1,20 +1,115 @@
+<!--10개씩 보여주기-->
+{% if page_obj.has_other_pages %}
+  <div style="text-align: center; margin: 1rem 0;">
+  {% if page_range.0|add:"-10" > 0 %}
+    <a href="?page={{ page_range.0|add:"-10" }}" class="btn btn-secondary rounded-pill"> << </a>
+  {% endif %}
+
+  {% for page_num in page_range %}
+    {% if page_num == page_obj.number %}
+      <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>
+    {% else %}
+      <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_range|last|add:"1" <= page_obj.paginator.num_pages %}
+    <a href="?page={{ page_range|last|add:"1" }}" class="btn btn-secondary rounded-pill"> >> </a>
+  {% endif %}
+  </div>
+{% endif %}
+
+
+
+
+
+<!--5개씩 보여주기 >, >>-->
+<!--{% if page_obj.has_other_pages %}-->
+<!--  <div style="text-align: center; margin: 1rem 0;">-->
+<!--  {% if page_obj.has_previous %}-->
+<!--    <a href="?page=1" class="btn btn-secondary rounded-pill"> << </a>-->
+<!--    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill"> < </a>-->
+<!--  {% endif %}-->
+
+<!--  {% for page_num in page_obj.paginator.page_range %}-->
+<!--    {% if page_num >= page_obj.number|add:'-5' and page_num <= page_obj.number|add:'5' %}-->
+<!--      {% if page_num == page_obj.number %}-->
+<!--        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>-->
+<!--      {% else %}-->
+<!--        <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill"> {{ page_num }} </a>-->
+<!--      {% endif %}-->
+<!--    {% endif %}-->
+<!--  {% endfor %}-->
+
+<!--  {% if page_obj.has_next %}-->
+<!--    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill"> > </a>-->
+<!--    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary rounded-pill"> >> </a>-->
+<!--  {% endif %}-->
+<!--  </div>-->
+<!--{% endif %}-->
+
+
+
+
+<!--전체 가져오기, 이동-->
+<!--<div style="text-align: center; margin: 1rem 0;">-->
+<!--  {% if page_obj.has_previous %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill">-->
+<!--      이전-->
+<!--    </a>-->
+<!--  {% endif %}-->
+
+<!--  {% for page in paginator.page_range %} &lt;!&ndash; paginator의 page_range를 순회하면서 페이지 링크를 생성 &ndash;&gt;-->
+<!--    {% if page == page_obj.number %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill active">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% else %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% endif %}-->
+<!--  {% endfor %}-->
+
+<!--  {% if page_obj.has_next %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill">-->
+<!--      다음-->
+<!--    </a>-->
+<!--  {% endif %}-->
+<!--</div>-->
+
+<!--전체를 가져오기-->
+<!--<div style="text-align: center; margin: 1rem 0;">-->
+<!--  {% for page in paginator.page_range %} &lt;!&ndash; paginator의 page_range를 순회하면서 페이지 링크를 생성 &ndash;&gt;-->
+<!--    {% if page == page_obj.number %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill active">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% else %}-->
+<!--      <a href="{% url 'articleapp:list' %}?page={{ page }}" class="btn btn-secondary rounded-pill">-->
+<!--        {{ page }}-->
+<!--      </a>-->
+<!--    {% endif %}-->
+<!--  {% endfor %}-->
+<!--</div>-->
+
 
 <!--앞뒤 1개씩 가져오기-->
-<div style="text-align: center; margin: 1rem 0;">
-    {% if page_obj.has_previous %} <!--현재 페이지에서, 이전 페이지가 있는지 확인-->
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"
-       class="btn btn-secondary rounded-pill"> <!--이전 페이지로 향하는 링크 넘겨줌-->
-        {{ page_obj.previous_page_number }}
-    </a>
-    {% endif %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"
-       class="btn btn-secondary rounded-pill active"> <!--현재 페이지로 이동하는 링크를 생성-->
-        {{ page_obj.number }}
-    </a>
-    {% if page_obj.has_next %}
-    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"
-       class="btn btn-secondary rounded-pill"> <!--다음 페이지로 이동하는 링크를 생성-->
-        {{ page_obj.next_page_number }}
-    </a>
-    {% endif %}
-</div>
+<!--<div style="text-align: center; margin: 1rem 0;">-->
+<!--    {% if page_obj.has_previous %} &lt;!&ndash;현재 페이지에서, 이전 페이지가 있는지 확인&ndash;&gt;-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"-->
+<!--       class="btn btn-secondary rounded-pill"> &lt;!&ndash;이전 페이지로 향하는 링크 넘겨줌&ndash;&gt;-->
+<!--        {{ page_obj.previous_page_number }}-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"-->
+<!--       class="btn btn-secondary rounded-pill active"> &lt;!&ndash;현재 페이지로 이동하는 링크를 생성&ndash;&gt;-->
+<!--        {{ page_obj.number }}-->
+<!--    </a>-->
+<!--    {% if page_obj.has_next %}-->
+<!--    <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"-->
+<!--       class="btn btn-secondary rounded-pill"> &lt;!&ndash;다음 페이지로 이동하는 링크를 생성&ndash;&gt;-->
+<!--        {{ page_obj.next_page_number }}-->
+<!--    </a>-->
+<!--    {% endif %}-->
+<!--</div>-->
