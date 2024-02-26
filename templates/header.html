@@ -9,7 +9,9 @@
             <a href="{% url 'projectapp:list' %}" class="instagram_header_nav">
                 <span>Projects</span>
             </a>
-
+            <a href="{% url 'subscribeapp:list' %}" class="instagram_header_nav">
+                <span>Subscription</span>
+            </a>
             {% if not user.is_authenticated %}  <!--로그인 안 된 상태일 때,-->
             <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="instagram_header_nav"> <!--next 쿼리 매개변수로 추가(로그인 후, 사용자를 원래 요청한 페이지로 리디렉션)-->
                 <span>Login</span>
