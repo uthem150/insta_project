@@ -62,7 +62,7 @@ class ArticleListView(ListView): #ListView를 상속받은 ArticleListView 클�
     model = Article
     context_object_name = 'article_list' #템플릿에서 사용할 컨텍스트 변수의 이름, article_list라는 이름으로 템플릿에 전달
     template_name = 'articleapp/list.html'
-    paginate_by = 5 #한 페이지에 보여줄 항목의 수
+    paginate_by = 7 #한 페이지에 보여줄 항목의 수
 
     def get_context_data(self, **kwargs): #ListView가 템플릿에 전달하는 컨텍스트 데이터를 추가로 제공하거나 수정
         context = super().get_context_data(**kwargs) #부모 클래스인 ListView의 get_context_data 메소드를 호출하여 기본 컨텍스트 데이터를 가져옴
