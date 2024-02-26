@@ -39,7 +39,7 @@ SECRET_KEY = env('SECRET_KEY') #.env파일 안에서 SECRET_KEY를 읽어옴
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #모든 호스트에 대해 허용한다는 세팅
 
 
 # Application definition
