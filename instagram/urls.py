@@ -19,8 +19,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from articleapp.views import ArticleListView
+
 urlpatterns = [
     #path: Django URL 패턴을 정의하는 함수  (URL 패턴, 해당 URL 패턴에 매치될 때 실행될 뷰 함수나 include 함수)
+    path('', ArticleListView.as_view(), name='home'), #기본 화면
+
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')), #accounts라는 주소로 접근하면, account app으로 접근
     path('profiles/', include('profileapp.urls')),
