@@ -27,4 +27,5 @@ urlpatterns = [
     path('articles/', include('articleapp.urls')),
     path('comments/', include('commentapp.urls')), #사용자가 'comments/' URL에 접근했을 때, 'commentapp' 애플리케이션의 URL 설정을 참조
     path('projects/', include('projectapp.urls')),
+    path('subscribe/', include('subscribeapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #instagram폴더 settings안에 적은 값을 가져옴

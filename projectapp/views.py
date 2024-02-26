@@ -10,7 +10,9 @@ from django.views.generic.list import MultipleObjectMixin
 from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
+from subscribeapp.models import Subscription
 
+#클라이언트의 요청을 처리하고, 필요한 데이터를 모델로부터 가져와서 템플릿을 렌더링
 
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
@@ -33,8 +35,17 @@ class ProjectDetailView(DetailView, MultipleObjectMixin): # 프로젝트 상세 
 
     # 프로젝트 아래에, 게시글들이 나올 수 있도록
     def get_context_data(self, **kwargs):
+        project = self.object #현재 객체를 가져옴
+        user = self.request.user #현재 요청을 보낸 사용자를 가져옴
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user, project=project) #현재 사용자와 프로젝트에 대한 구독 객체를 필터링
+
         object_list = Article.objects.filter(project=self.get_object()) #Article 모델에서 project 필드가 현재 뷰의 get_object() 메서드에서 반환된 프로젝트와 일치하는 객체들을 필터링하여 저장
-        return super(ProjectDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        #부모 클래스인 DetailView의 get_context_data() 메서드를 실행
+        #이때, 추가로 전달할 컨텍스트 데이터인 object_list와 subscription을 함께 전달( 반환된 컨텍스트 데이터는 템플릿에서 사용)
+        return super(ProjectDetailView, self).get_context_data(object_list=object_list,
+                                                               subscription=subscription,
+                                                               **kwargs)
 
 class ProjectListView(ListView): #프로젝트 목록을 보여주는 뷰
     model = Project
