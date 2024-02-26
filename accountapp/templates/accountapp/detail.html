@@ -11,18 +11,22 @@
             {% if target_user.profile %} <!--프로필이 존재하면-->
             <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
                 {{ target_user.profile.nickname }} <!--닉네임을 보여줌-->
-                <a class="material-icons"
-                   style = "box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem;"
-                   href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                    edit
-                </a>
+                    {% if target_user == user %}
+                        <a class="material-icons"
+                           style = "box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem;"
+                           href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                            edit
+                        </a>
+                    {% endif %}
             </h2>
             {% else %} <!--프로필이 존재하지 않으면-->
-            <a href="{% url 'profileapp:create' %}"> <!--프로필 만드는 페이지 연결-->
-                <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
-                    Create Profile
-                </h2>
-            </a>
+                {% if target_user == user %} <!--target_user와 지금 접속한 user가 같다면-->
+                    <div>
+                        <a href="{% url 'profileapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-2"> <!--프로필 만드는 페이지 연결-->
+                            Create Profile
+                        </a>
+                    </div>
+                {% endif %}
             {% endif %}
 
             <h5 style="margin-bottom:3rem;">
@@ -30,16 +34,16 @@
             </h5>
 
             {% if target_user == user %} <!--target_user와 지금 접속한 user가 같다면-->
-            <a class="material-icons"
-                style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
-                href="{% url 'accountapp:update' pk=user.pk %}">
-                settings
-            </a>
-            <a class="material-icons"
-                style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .4rem;"
-                href="{% url 'accountapp:delete' pk=user.pk %}">
-                cancel
-            </a>
+                <a class="material-icons"
+                    style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
+                    href="{% url 'accountapp:update' pk=user.pk %}">
+                    settings
+                </a>
+                <a class="material-icons"
+                    style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .4rem;"
+                    href="{% url 'accountapp:delete' pk=user.pk %}">
+                    cancel
+                </a>
             {% endif %}
         </div>
         <div>

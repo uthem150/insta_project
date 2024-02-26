@@ -14,8 +14,9 @@ class ProfileCreateView(CreateView): #CreateView를 상속받아 프로필 생�
     model = Profile
     context_object_name = 'target_profile' #템플릿에서 사용할 컨텍스트 객체의 이름을 지정
     form_class = ProfileCreationForm #뷰에서 사용할 폼 클래스를 지정
-    success_url = reverse_lazy('accountapp:hello_world') #프로필 생성이 성공한 후 이동할 URL을 지정
+    success_url = reverse_lazy('articleapp:list') #프로필 생성이 성공한 후 이동할 URL을 지정
     template_name = 'profileapp/create.html' #뷰에서 사용할 템플릿 파일의 경로를 지정
+
 
     def form_valid(self, form):
         temp_profile = form.save(commit=False) #임시 데이터 저장
@@ -29,5 +30,5 @@ class ProfileUpdateView(UpdateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreationForm
-    success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('articleapp:list')
     template_name = 'profileapp/update.html'

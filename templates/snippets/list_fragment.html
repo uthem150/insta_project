@@ -46,12 +46,14 @@
     <!--page_obj는 Paginator를 통해 생성된 객체-->
     {% include 'snippets/pagination.html' with page_obj=page_obj %}
 
+    {% if target_user == user %} <!--target_user와 지금 접속한 user가 같다면-->
     <!-- 글쓰기 버튼  -->
     <div style="text-align: center">
         <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-2">
             Create Article
         </a>
     </div>
+    {% endif %}
 
     <!--staitc 내부의 js폴더의 magicgrid.js파일 가져옴-->
     <script src="{% static 'js/magicgrid.js' %}"></script>
