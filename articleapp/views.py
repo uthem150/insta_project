@@ -5,11 +5,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
-
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 @method_decorator(login_required, 'get')
@@ -28,8 +29,10 @@ class ArticleCreateView(CreateView): #게시글 생성에 대한 뷰를 정의 (
     def get_success_url(self): #게시글 생성이 성공한 후 이동할 URL을 반환하는 메서드
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
-class ArticleDetailView(DetailView): #Article 모델의 상세보기 기능을 구현
+# 다중상속을 위해 FormMixin
+class ArticleDetailView(DetailView, FormMixin): #Article 모델의 상세보기 기능을 구현
     model = Article #model 변수에 Article 모델을 연결하여 해당 모델의 객체를 가져옴
+    form_class = CommentCreationForm
     context_object_name = 'target_article' #템플릿에서 해당 객체에 접근할 때 사용할 변수명을 설정
     template_name = 'articleapp/detail.html'
 

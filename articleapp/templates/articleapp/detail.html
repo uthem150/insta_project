@@ -32,7 +32,8 @@
       </a>
       {% endif %}
       <hr>
-
+      <!--create.html파일을 가져오고, with구문을 통해, target_article 변수를 article이라는 이름으로 'commentapp/create.html' 템플릿에 전달-->
+      {% include 'commentapp/create.html' with article=target_article %}
     </div>
   </div>
 

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'accountapp', #추가되는 app들을 작성
     'profileapp',
     'articleapp',
+    'commentapp'
 ]
 
 MIDDLEWARE = [

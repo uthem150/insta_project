@@ -1,0 +1,27 @@
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <div class="instagram_500px_div">
+        <div class="mb-4">
+            <h4>Comment Create</h4>
+        </div>
+        <form action="{% url 'commentapp:create' %}" method="post"> <!--commentapp 애플리케이션의 create 뷰로 데이터를 전송하는 <form> 요소-->
+            {% csrf_token %}
+            {% bootstrap_form form %} <!--form 변수를 사용하여 폼 필드를 자동으로 생성하는 Bootstrap 스타일의 폼을 생성하는 템플릿 태그-->
+
+            {% if user.is_authenticated %}
+                <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+            {% else %}
+                <a href="{% url 'accountapp:login' %}?next={{ request.path }}"
+                    class="btn btn-dark rounded-pill col-6 mt-3">
+                    Login
+                </a>
+            {% endif %}
+            <!--댓글이 속하는 게시글의 article_pk 값을 전달하기 위한 숨겨진 <input> 요소-->
+            <input type="hidden" name="article_pk" value="{{ article.pk }}"> <!--현재 article의 pk가 뭔지, articleapp의 detail에서 받은 article을 이용해 value로 서버를 보내줌-->
+
+        </form>
+    </div>
+
+{% endblock %}
