@@ -16,6 +16,9 @@
       </h5>
 
     </div>
+    <div>
+        {% include 'snippets/list_fragment.html' with article_list=object_list %} <!-- object_list 변수를 article_list라는 이름으로 전달-->
+    </div>
   </div>
 
 {% endblock %}

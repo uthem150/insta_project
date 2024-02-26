@@ -5,7 +5,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
+from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
 
@@ -22,11 +24,17 @@ class ProjectCreateView(CreateView):
         return reverse('projectapp:detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectDetailView(DetailView): # 프로젝트 상세 정보를 보여주는 뷰
+class ProjectDetailView(DetailView, MultipleObjectMixin): # 프로젝트 상세 정보를 보여주는 뷰 (Mixin을 사용해서 프로젝트 아래에 이미지 넣기)
     model = Project
     context_object_name = 'target_project' #템플릿에서 사용할 객체의 변수명을 설정
     template_name = 'projectapp/detail.html'
 
+    paginate_by = 25
+
+    # 프로젝트 아래에, 게시글들이 나올 수 있도록
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(project=self.get_object()) #Article 모델에서 project 필드가 현재 뷰의 get_object() 메서드에서 반환된 프로젝트와 일치하는 객체들을 필터링하여 저장
+        return super(ProjectDetailView, self).get_context_data(object_list=object_list, **kwargs)
 
 class ProjectListView(ListView): #프로젝트 목록을 보여주는 뷰
     model = Project

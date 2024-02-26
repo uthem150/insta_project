@@ -1,0 +1,71 @@
+{% load static %}
+
+
+<style>
+    .container {
+        padding: 0;
+        margin: 0, auto;
+    }
+
+    .container a {
+        width: 43%;
+        max-width: 250px;
+    }
+
+    .container div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 1rem;
+    }
+
+    .container img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+
+</style>
+
+   {% if article_list %}
+    <div class="container">
+        {% for article in article_list %} <!--article list안의 모든 article에 대해 반복-->
+        <a href="{% url 'articleapp:detail' pk=article.pk %}"> <!--article 객체의 pk 값을 기반으로 articleapp 앱의 detail URL로 이동-->
+            {% include 'snippets/card.html' with article=article %} <!--'snippets/card.html' 템플릿을 불러와서 article 객체를 해당 템플릿에 전달하여 렌더링 -->
+        </a>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <h1>No Articles Yet!</h1>
+    </div>
+    {% endif %}
+
+    <!--  'snippets/pagination.html' 템플릿을 불러와서 page_obj 객체를 해당 템플릿에 전달하여 페이징을 표시  -->
+    <!--page_obj는 Paginator를 통해 생성된 객체-->
+    {% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+    <!-- 글쓰기 버튼  -->
+    <div style="text-align: center">
+        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill mt-3 mb-3 px-2">
+            Create Article
+        </a>
+    </div>
+
+    <!--staitc 내부의 js폴더의 magicgrid.js파일 가져옴-->
+    <script src="{% static 'js/magicgrid.js' %}"></script>
+
+    <!--magicgrid가 페이지 이동시에 제대로 작동하도록 조정-->
+    <script>
+    window.onload = function() { <!--브라우저 창의 모든 내용이 완전히 로드된 후에 실행되는 함수-->
+      let magicGrid = new MagicGrid({
+        container: '.container', <!--클래스 이름이 'container'인 요소에 MagicGrid를 적용-->
+        static: true, <!--그리드 아이템의 크기가 고정-->
+        gutter: 12 // 원하는 여백 값으로 수정
+      });
+      magicGrid.listen();
+    }
+    </script>
+
+
