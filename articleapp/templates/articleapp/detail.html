@@ -15,9 +15,9 @@
       <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"
               src="{{ target_article.image.url }}" alt=""> <!--게시글의 이미지 URL을 출력-->
 
-      <p>
-        {{ target_article.content }} <!--게시글의 내용을 출력-->
-      </p>
+      <div class="text-left">
+        {{ target_article.content | safe }}
+      </div>
 
 
       {% if target_article.writer == user %} <!--인증작업-->
