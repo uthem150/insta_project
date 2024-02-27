@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'instagram.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'instagram.settings.local') #settings폴더의 local파일을 사용하여 서버 연다
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
