@@ -20,9 +20,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    #path: Django URL 패턴을 정의하는 함수  (URL 패턴, 해당 URL 패턴에 매치될 때 실행될 뷰 함수나 include 함수)
     path('admin/', admin.site.urls),
-    path('accounts/', include('accountapp.urls')), #account라는 주소로 접근하면, account app으로 접근
+    path('accounts/', include('accountapp.urls')), #accounts라는 주소로 접근하면, account app으로 접근
     path('profiles/', include('profileapp.urls')),
     path('articles/', include('articleapp.urls')),
-
+    path('comments/', include('commentapp.urls')), #사용자가 'comments/' URL에 접근했을 때, 'commentapp' 애플리케이션의 URL 설정을 참조
+    path('projects/', include('projectapp.urls')),
+    path('subscribe/', include('subscribeapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #instagram폴더 settings안에 적은 값을 가져옴

@@ -1,11 +1,11 @@
 <!--10개씩 보여주기-->
-{% if page_obj.has_other_pages %}
+{% if page_obj.has_other_pages %} <!--다른 페이지가 존재하면 페이지네이션을 보여주라(1페이지 이상)-->
   <div style="text-align: center; margin: 1rem 0;">
-  {% if page_range.0|add:"-10" > 0 %}
+  {% if page_range.0|add:"-10" > 0 %} <!--현재 페이지 그룹이 첫 페이지 그룹이 아닌 경우에만 '<<' 버튼을 보여주기 위한 조건문-->
     <a href="?page={{ page_range.0|add:"-10" }}" class="btn btn-secondary rounded-pill"> << </a>
   {% endif %}
 
-  {% for page_num in page_range %}
+  {% for page_num in page_range %} <!--page_range에 있는 각 페이지 번호에 대해 반복문을 시작-->
     {% if page_num == page_obj.number %}
       <a href="?page={{ page_num }}" class="btn btn-secondary rounded-pill active"> {{ page_num }} </a>
     {% else %}
@@ -13,12 +13,12 @@
     {% endif %}
   {% endfor %}
 
-  {% if page_range|last|add:"1" <= page_obj.paginator.num_pages %}
+  <!--현재 페이지 그룹의 마지막 페이지 번호를 가져오고, 1을 더하면, 다음 페이지 그룹의 첫 페이지 번호 <= 전체 페이지 수-->
+  {% if page_range|last|add:"1" <= page_obj.paginator.num_pages %} <!--현재 페이지 그룹이 마지막 페이지 그룹이 아닌 경우에만 '>>' 버튼을 보여줌-->
     <a href="?page={{ page_range|last|add:"1" }}" class="btn btn-secondary rounded-pill"> >> </a>
   {% endif %}
   </div>
 {% endif %}
-
 
 
 

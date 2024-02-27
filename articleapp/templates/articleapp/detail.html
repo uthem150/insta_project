@@ -3,25 +3,43 @@
 {% block content %}
 
   <div>
-    <div class="instagram_500px_div">
+    <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
 
       <h1>
         {{ target_article.title }} <!--게시글의 제목을 출력-->
       </h1>
+      <h5>
+        {{ target_article.writer.profile.nickname }}
+      </h5>
+      <hr>
+      <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"
+              src="{{ target_article.image.url }}" alt=""> <!--게시글의 이미지 URL을 출력-->
 
-      <img src="{{ target_article.image.url }}" alt=""> <!--게시글의 이미지 URL을 출력-->
-
-      <p>
-        {{ target_article.content }} <!--게시글의 내용을 출력-->
-      </p>
+      <div class="text-left">
+        {{ target_article.content | safe }}
+      </div>
 
 
-    <a href="{% url 'articleapp:update' pk=target_article.pk %}">
-      <p>Update Article</p>
-    </a>
-      <a href="{% url 'articleapp:delete' pk=target_article.pk %}">
-      <p>Delete Article</p>
-    </a>
+      {% if target_article.writer == user %} <!--인증작업-->
+      <a href="{% url 'articleapp:update' pk=target_article.pk %}"
+      class="btn btn-primary rounded-pill col-3">
+        Update
+      </a>
+
+      <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
+      class="btn btn-danger rounded-pill col-3">
+        Delete
+      </a>
+      {% endif %}
+      <hr>
+
+      <!--target_article에 대한 댓글을 모두 가져와서 각각에 대해 'commentapp/detail.html' 템플릿을 포함-->
+      {% for comment in target_article.comment.all %}
+        {% include 'commentapp/detail.html' with comment=comment %} <!--comment 변수를 comment라는 이름으로 템플릿 내에서 사용할 수 있도록-->
+      {% endfor %}
+
+      <!--create.html파일을 가져오고, with구문을 통해, target_article 변수를 article이라는 이름으로 'commentapp/create.html' 템플릿에 전달-->
+      {% include 'commentapp/create.html' with article=target_article %}
     </div>
   </div>
 

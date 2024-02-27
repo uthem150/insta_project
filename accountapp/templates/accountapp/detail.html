@@ -6,7 +6,7 @@
         <div class="instagram_500px_div">
 
             <img src="{{ target_user.profile.image.url }}" alt=""
-                 style="height: 12rem; width: 12rem; border-radius:15rem; margin-bottom: 2rem;">
+                 style="height: 12rem; width: 12rem; border-radius:15rem; margin-bottom: 2rem; object-fit: cover">
 
             {% if target_user.profile %} <!--프로필이 존재하면-->
             <h2 style="font-family: 'NanumSquareB'; font-weight: bold;">
@@ -39,6 +39,10 @@
                 </p>
             </a>
             {% endif %}
+        </div>
+        <div>
+            <!--내가 작성한 게시글 가져오기-->
+            {% include 'snippets/list_fragment.html' with article_list=object_list %}
         </div>
     </div>
 {% endblock %}

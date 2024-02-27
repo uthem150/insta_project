@@ -6,3 +6,5 @@ class AccountUpdateForm(UserCreationForm):
         super().__init__(*args, **kwargs) #  부모 클래스인 UserCreationForm의 __init__ 메서드를 실행
 
         self.fields['username'].disabled = True #username 필드를 비활성화
+
+

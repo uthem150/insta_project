@@ -2,28 +2,31 @@
     <div>
         <h1 class="instagram_logo">Instagram</h1>
     </div>
-    <div>
-        <a href="{% url 'articleapp:list' %}">
-            <span>Articles</span>
-        </a>
-        <span>nav2</span>
-        <span>nav3</span>
-
-        {% if not user.is_authenticated %}  <!--로그인 안 된 상태일 때,-->
-        <a href="{% url 'accountapp:login' %}?next={{ request.path }}"> <!--next 쿼리 매개변수로 추가(로그인 후, 사용자를 원래 요청한 페이지로 리디렉션)-->
-            <span>Login</span>
-        </a>
-        <a href="{% url 'accountapp:create' %}">
-            <span>Sign Up</span>
-        </a>
-        {% else %} <!-- 로그인 된 상태일 때-->
-        <a href="{% url 'accountapp:detail' pk=user.pk %}"> <!--접속해 있는 user의 primary key를 받아서 pk에 넘겨주고, detail url에 들어갈 때, 함께 /뒤에 넣어줌-->
-            <span>MyPage</span>
-        </a>
-        <!--   장고 5부터 logout는 POST 방식만 허용    -->
-        <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-            <span>Logout</span>
-        </a>
+        <div class="instagram_header_navbar">
+            <a href="{% url 'articleapp:list' %}" class="instagram_header_nav">
+                <span>Articles</span>
+            </a>
+            <a href="{% url 'projectapp:list' %}" class="instagram_header_nav">
+                <span>Projects</span>
+            </a>
+            <a href="{% url 'subscribeapp:list' %}" class="instagram_header_nav">
+                <span>Subscription</span>
+            </a>
+            {% if not user.is_authenticated %}  <!--로그인 안 된 상태일 때,-->
+            <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="instagram_header_nav"> <!--next 쿼리 매개변수로 추가(로그인 후, 사용자를 원래 요청한 페이지로 리디렉션)-->
+                <span>Login</span>
+            </a>
+            <a href="{% url 'accountapp:create' %}" class="instagram_header_nav">
+                <span>SignUp</span>
+            </a>
+            {% else %} <!-- 로그인 된 상태일 때-->
+            <a href="{% url 'accountapp:detail' pk=user.pk %}" class="instagram_header_nav"> <!--접속해 있는 user의 primary key를 받아서 pk에 넘겨주고, detail url에 들어갈 때, 함께 /뒤에 넣어줌-->
+                <span>MyPage</span>
+            </a>
+            <!--   장고 5부터 logout는 POST 방식만 허용    -->
+            <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="instagram_header_nav">
+                <span>Logout</span>
+            </a>
         <!-- 로그아웃을 처리하기 위한 폼을 정의 -->
         <form id="logout-form" action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post" style="display: none;">
             {% csrf_token %}

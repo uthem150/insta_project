@@ -21,3 +21,28 @@
     max-width: 500px;
     margin: 4rem auto;
 }
+
+@media screen and (max-width:500px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.instagram_header_nav {
+    margin: 0 0.5rem;
+}
+
+
+.instagram_header_navbar {
+    margin: 1rem 0;
+}

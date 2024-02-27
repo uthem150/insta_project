@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
 
 
     <div class="instagram_500px_div">
@@ -13,8 +15,10 @@
         <form action="{% url 'articleapp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
+
             <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
         </form>
     </div>
+<script>var editor = new MediumEditor('.editable');</script>
 
 {% endblock %}

@@ -6,12 +6,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
-
-
+from articleapp.models import Article
 
 has_ownership = [account_ownership_required, login_required]
 
@@ -41,10 +41,16 @@ class AccountCreateView(CreateView) :
     success_url = reverse_lazy('accountapp:hello_world') #폼 제출 후에 이동할 URL을 지정
     template_name = 'accountapp/create.html' #사용될 템플릿 파일의 경로를 지정 (회원가입을 할 때 볼 html파일)
 
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 25
+    # mypage아래에 나의 게시글들 가져오기
+    def get_context_data(self, **kwargs): #부모 클래스의 get_context_data 메서드를 실행
+        object_list = Article.objects.filter(writer=self.get_object()) #Article 모델에서 writer 필드가 현재 뷰의 get_object() 메서드에서 반환된 작성자와 일치하는 객체들을 필터링하여 저장
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs) #부모 클래스의 get_context_data 메서드에 전달
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
