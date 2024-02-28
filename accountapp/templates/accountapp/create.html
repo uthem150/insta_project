@@ -7,13 +7,15 @@
     <div class="mb-4">
       <h4>SignUp</h4>
     </div>
-    <form action="{% url 'accountapp:create' %}" method="post"> <!-- accountapp 내부의 create라는 라우트로 연결해라 -->
-      {% csrf_token %}
+    <div class="my-form-group">
+      <form action="{% url 'accountapp:create' %}" method="post"> <!-- accountapp 내부의 create라는 라우트로 연결해라 -->
+        {% csrf_token %}
 
-      <!-- bootstrap이 적용된 form사용(form_class에 할당된 UserCreationForm이 form 변수에 전달) -->
-      {% bootstrap_form form %}
-      <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
-    </form>
+        <!-- bootstrap이 적용된 form사용(form_class에 할당된 UserCreationForm이 form 변수에 전달) -->
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+      </form>
+    </div>
   </div>
 
 {% endblock %}
