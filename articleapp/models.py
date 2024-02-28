@@ -16,7 +16,7 @@ class Article(models.Model):
 
     created_at = models.DateField(auto_now_add=True, null=True)
 
-    like = models.IntegerField(default=0) #좋아요 수
+    # like = models.IntegerField(default=0) #좋아요 수
     liked_users = models.ManyToManyField(User, related_name='liked_articles', blank=True)  # 좋아요를 누른 사용자를 저장하는 ManyToManyField
 
 

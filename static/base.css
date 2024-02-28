@@ -46,3 +46,7 @@ a:hover {
 .instagram_header_navbar {
     margin: 1rem 0;
 }
+
+.card_img {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
