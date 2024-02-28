@@ -11,13 +11,21 @@
 
       <div style="height: 2rem;">
         <a href="{% url 'likeapp:article_like' pk=target_article.pk %}">
-          <i style="vertical-align: middle; font-size: 1.3rem; color: #f77"
-             class="material-icons">
-            favorite
-          </i>
+          {% if user in target_article.liked_users.all %} <!--현재 사용자가 target_article을 좋아요한 경우-->
+              <i style="vertical-align: middle; font-size: 1.3rem; color: #f55"
+                 class="material-icons">
+                favorite
+              </i>
+          {% else %}
+              <i style="vertical-align: middle; font-size: 1.3rem; color: #f99"
+                 class="material-icons">
+                favorite
+              </i>
+          {% endif %}
         </a>
         <span style="vertical-align: middle; font-size: 1.2rem;">
-          {{ target_article.like }} <!--target_article안에 있는 like값 출력-->
+<!--          {{ target_article.like }} &lt;!&ndash;target_article안에 있는 like값 출력&ndash;&gt;-->
+          {{ target_article.liked_users.all.count }} <!--target_article의 liked_users 필드에 연결된 사용자 객체의 수 출력-->
         </span>
       </div>
 
