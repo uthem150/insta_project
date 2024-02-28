@@ -17,7 +17,7 @@ from commentapp.forms import CommentCreationForm
 @method_decorator(login_required, 'post')
 class ArticleCreateView(CreateView): #게시글 생성에 대한 뷰를 정의 (CreateView를 상속받아 게시글 생성에 대한 뷰를 정의하는 클래스)
     model = Article #이 뷰가 Article 모델과 연결되어 있음
-    form_class = ArticleCreationForm #뷰에서 사용할 폼 클래스를 지정
+    form_class = ArticleCreationForm #해당 뷰에서 사용할 폼 클래스를 지정
     template_name = 'articleapp/create.html' #뷰에서 사용할 템플릿 파일의 경로를 지정
 
     def form_valid(self, form): #폼 데이터가 유효할 때 호출되는 메서드(폼 데이터를 저장하기 전에 추가적인 작업)

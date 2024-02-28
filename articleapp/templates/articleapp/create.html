@@ -14,7 +14,7 @@
         <!--    이미지가 들어가므로, enctype    -->
         <form action="{% url 'articleapp:create' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% bootstrap_form form %}
+            {% bootstrap_form form %} <!--form 변수는 ArticleCreationForm의 인스턴스-->
 
             <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
         </form>
