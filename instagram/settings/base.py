@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 
 import os, environ
+from django.contrib.messages import constants as messages
 
 from django.urls import reverse_lazy
 
@@ -49,6 +50,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger', #error일 때 출력할 이름을 danger로 설정
+}
 
 ROOT_URLCONF = 'instagram.urls'
 

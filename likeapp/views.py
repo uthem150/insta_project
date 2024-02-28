@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -22,11 +23,14 @@ class LikeArticleView(RedirectView):
         article = get_object_or_404(Article, pk=kwargs['pk']) #Article 모델에서 pk 값을 기반으로 해당 게시글을 가져옴
 
         if LikeRecord.objects.filter(user=user, article=article).exists(): #exists() 메서드를 사용하여, 사용자와 게시글이 일치하는 기록이 이미 존재하는지 확인
+            messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다.')
             return HttpResponseRedirect(reverse('articleapp:detail', kwargs={'pk': kwargs['pk']})) #이미 좋아요 기록이 존재한다면, 해당 게시글의 상세 페이지로 리다이렉트
         else:
             LikeRecord(user=user, article=article).save() # LikeRecord 모델 객체를 생성, save() 메서드를 호출하여 해당 객체를 데이터베이스에 저장
 
         article.like += 1
         article.save() #변경된 좋아요 수를 데이터베이스에 저장
+
+        messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.')
 
         return super(LikeArticleView, self).get(self.request, *args, **kwargs) #좋아요 기록이 존재하지 않는 경우에는 super()를 사용하여 기본 RedirectView의 get() 메서드를 호출하여 GET 요청을 처리
