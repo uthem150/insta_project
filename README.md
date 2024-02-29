@@ -1,3 +1,6 @@
+
+![ezgif-7-518aa13a8d](https://github.com/uthem150/insta_project/assets/142042011/0eec46ab-952e-4a07-af74-35cc6ddba69c)
+
 front : HTML, CSS, JS  
 back : MariaDB, Nginx, Django, Docker  
   
