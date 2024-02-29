@@ -29,9 +29,7 @@
         </span>
       </div>
 
-
-
-        {% if target_article.writer.profile.is_active %}
+        {% if target_article.writer.pk %}
             <div>
                 <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
                   <img src="{{ target_article.writer.profile.image.url }}" alt=""
