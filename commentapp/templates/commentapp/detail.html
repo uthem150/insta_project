@@ -1,12 +1,33 @@
 <div style="border: 1px solid; text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem;
             border-color: #bbb;">
     <div>
-        <strong>
-            {{ comment.writer.profile.nickname }}
-        </strong>
-        <!--&nbsp;는 HTML에서 공백 문자를 나타내는 특수 문자(non-breaking space) - 줄 바꿈이 일어나지 않고 고정된 공간을 만듬-->
-        &nbsp&nbsp&nbsp <!--닉네임과 작성일자 사이에 일정한 간격을 만들기 위해 &nbsp;&nbsp;&nbsp;를 사용-->
-        {{ comment.created_at }}
+        {% if comment.writer.pk %}
+            <div>
+                <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">
+                    {% if comment.writer.profile.image.url %}
+                        <img src="{{ comment.writer.profile.image.url }}" alt=""
+                        style="vertical-align: middle; height: 2rem; width: 2rem; border-radius: 2rem; object-fit: cover; border: 1px solid lightgray;">
+                    {% else %}
+                        <span style="display: inline-block; vertical-align: middle; height: 2rem; width: 2rem; border-radius: 2rem; object-fit: cover; border: 1px solid lightgray;"></span>
+                    {% endif %}
+                </a>
+                <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">
+                  <span style="vertical-align: middle; font-size: 1.2rem; margin-left: 5px">
+                    {{ comment.writer.profile.nickname }}
+                  </span>
+                    <!--&nbsp;는 HTML에서 공백 문자를 나타내는 특수 문자(non-breaking space) - 줄 바꿈이 일어나지 않고 고정된 공간을 만듬-->
+                    &nbsp&nbsp&nbsp <!--닉네임과 작성일자 사이에 일정한 간격을 만들기 위해 &nbsp;&nbsp;&nbsp;를 사용-->
+                    {{ comment.created_at }}
+                </a>
+            </div>
+        {% else %}
+            <span style="vertical-align: middle; font-size: 1rem; margin-left: 5px">
+              탈퇴한 사용자입니다
+            </span>
+            <!--&nbsp;는 HTML에서 공백 문자를 나타내는 특수 문자(non-breaking space) - 줄 바꿈이 일어나지 않고 고정된 공간을 만듬-->
+            &nbsp&nbsp&nbsp <!--닉네임과 작성일자 사이에 일정한 간격을 만들기 위해 &nbsp;&nbsp;&nbsp;를 사용-->
+            {{ comment.created_at }}
+        {% endif %}
     </div>
     <div style="margin: 1rem 0;">
         {{ comment.content }}
