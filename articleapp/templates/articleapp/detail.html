@@ -32,8 +32,12 @@
         {% if target_article.writer.pk %}
             <div>
                 <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
-                  <img src="{{ target_article.writer.profile.image.url }}" alt=""
-                    style="vertical-align: middle; height: 2rem; width: 2rem; border-radius:2rem; object-fit: cover; border: 1px solid lightgray;">
+                    {% if target_article.writer.profile.image.url %}
+                        <img src="{{ target_article.writer.profile.image.url }}" alt=""
+                        style="vertical-align: middle; height: 2rem; width: 2rem; border-radius: 2rem; object-fit: cover; border: 1px solid lightgray;">
+                    {% else %}
+                        <span style="display: inline-block; vertical-align: middle; height: 2rem; width: 2rem; border-radius: 2rem; object-fit: cover; border: 1px solid lightgray;"></span>
+                    {% endif %}
                 </a>
                 <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
                   <span style="vertical-align: middle; font-size: 1.2rem; margin-left: 5px">

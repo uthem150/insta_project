@@ -64,6 +64,9 @@ class ArticleListView(ListView): #ListView를 상속받은 ArticleListView 클�
     template_name = 'articleapp/list.html'
     paginate_by = 7 #한 페이지에 보여줄 항목의 수
 
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-pk')  # 게시글을 가장 최신 순으로 정렬해서 가져옴
+
     def get_context_data(self, **kwargs): #ListView가 템플릿에 전달하는 컨텍스트 데이터를 추가로 제공하거나 수정
         context = super().get_context_data(**kwargs) #부모 클래스인 ListView의 get_context_data 메소드를 호출하여 기본 컨텍스트 데이터를 가져옴
         total_pages = context['paginator'].num_pages # 페이징 처리를 위해 전체 페이지 수를 total_pages 변수에 저장
