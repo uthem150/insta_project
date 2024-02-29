@@ -29,17 +29,26 @@
         </span>
       </div>
 
-      <div>
-          <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
-              <img src="{{ target_article.writer.profile.image.url }}" alt=""
-              style="vertical-align: middle; height: 2rem; width: 2rem; border-radius:2rem; object-fit: cover; border: 1px solid lightgray;">
-          </a>
-          <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
-              <span style="vertical-align: middle; font-size: 1.2rem; margin-left: 5px">
-                {{ target_article.writer.profile.nickname }}
-              </span>
-          </a>
-      </div>
+
+
+        {% if target_article.writer.profile.is_active %}
+            <div>
+                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
+                  <img src="{{ target_article.writer.profile.image.url }}" alt=""
+                    style="vertical-align: middle; height: 2rem; width: 2rem; border-radius:2rem; object-fit: cover; border: 1px solid lightgray;">
+                </a>
+                <a href="{% url 'accountapp:detail' pk=target_article.writer.pk %}">
+                  <span style="vertical-align: middle; font-size: 1.2rem; margin-left: 5px">
+                    {{ target_article.writer.profile.nickname }}
+                  </span>
+                </a>
+            </div>
+        {% else %}
+            <span style="vertical-align: middle; font-size: 1.2rem; margin-left: 5px">
+              탈퇴한 사용자입니다
+            </span>
+        {% endif %}
+
       <hr>
       <img style="width: 100%; border-radius: 1rem; margin: 1.5rem 0; padding: 5px"
               src="{{ target_article.image.url }}" alt=""> <!--게시글의 이미지 URL을 출력-->

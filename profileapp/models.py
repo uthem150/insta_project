@@ -14,6 +14,3 @@ class Profile(models.Model): #데이터베이스에 저장될 필드들을 정�
     image = models.ImageField(upload_to='profile/', null=True) #upload_to 매개변수는 이미지가 저장될 경로를 지정
     nickname = models.CharField(max_length=20, unique=True, null=True)
     message = models.CharField(max_length=100, null=True)
-
-    def get_absolute_url(self):
-        return reverse('profile_detail', args=[self.pk])
