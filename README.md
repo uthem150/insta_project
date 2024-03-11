@@ -1,6 +1,13 @@
+# 인스타그램 프로젝트  
+<br>
 
-![ezgif-2-f0fce298c6](https://github.com/uthem150/insta_project/assets/142042011/a95d34f1-8a3f-4240-88c8-c923d54f922b)
+| 실행화면 |
+|:------------------------------------------------------:|
+|![ezgif-2-f0fce298c6](https://github.com/uthem150/insta_project/assets/142042011/a95d34f1-8a3f-4240-88c8-c923d54f922b)|
 
+<br>
+
+## 📍개발 스택
 front : HTML, CSS, JS  
 back : MariaDB, Nginx, Django, Docker  
   
