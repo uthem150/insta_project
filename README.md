@@ -16,11 +16,12 @@ back : MariaDB, Nginx, Django, Docker
 
 
 ## 📍주요 기능
-게시물 작성, 수정, 삭제
-게시글 좋아요 기능, 댓글 기능
-Pinterest 카드형 레이아웃 구현(MagicGrid)
-Pagination
+- 게시물 작성, 수정, 삭제
+- 게시글 좋아요 기능, 댓글 기능
+- Pinterest 카드형 레이아웃 구현(MagicGrid)
+- Pagination
 
+<br>
 
 ## 📌 구현 분류
 
